@@ -1,0 +1,65 @@
+# Consistency Lock — 角色一致性参数
+# 这个文件是跨图保持"是同一个人"的关键。每次重新生图都参考这里。
+
+character_slug: {{slug}}
+locked_date: {{YYYY-MM-DD}}
+
+# === 视觉锚点 ===
+art_style: {{画风描述}}
+style_reference:
+  description: {{画风参考描述}}
+  reference_image: {{可选：参考图路径或 URL}}
+
+# === 色板（按重要性排序） ===
+color_palette:
+  primary: "#xxxxxx"      # 主色
+  secondary: "#xxxxxx"    # 辅色
+  accent: "#xxxxxx"       # 点缀
+  shadow: "#xxxxxx"       # 阴影/暗色
+  highlight: "#xxxxxx"    # 高光/亮色
+
+# === 已锁定的生图参数 ===
+generation:
+  model: {{即梦 / Midjourney v6 / Flux dev / SDXL Pony 等}}
+  seed: {{第一次生成成功的 seed 值}}
+  cfg_scale: {{常用 5-10}}
+  steps: {{常用 25-40}}
+  sampler: {{euler_a / dpm++ 等，仅 SD 系}}
+  aspect_ratio: {{3:4 / 1:1 / 16:9}}
+
+  # 已训练的 LoRA / 参考图（可选）
+  lora: {{可选：角色 LoRA 路径或 ID}}
+  reference_image_url: {{可选：MJ cref / SD IP-Adapter 参考}}
+
+# === Prompt 锚点（每次都用） ===
+positive_prompt_anchor: |
+  {{固定写在每次 prompt 开头的描述，例如：}}
+  {{half-thick painting anime style, 1girl, navy blue waist-length hair with}}
+  {{loose curls, amber eyes with vertical pupils, fair skin, slim athletic build,}}
+  {{black mole near left eye, three silver ear cuffs on right ear}}
+
+negative_prompt_anchor: |
+  low quality, blurry, deformed, ugly, bad anatomy,
+  extra fingers, missing fingers, watermark, signature, text,
+  multiple characters,
+  {{用户在 Step 1 给出的 negative_prompt_seed}}
+
+# === 检查清单（每次新图都对照） ===
+must_have_features:
+  - {{标志特征 1，例：左眼下黑色泪痣}}
+  - {{标志特征 2，例：右耳三个银耳钉}}
+  - {{瞳色和瞳孔形状}}
+
+must_not_have:
+  - {{用户排除项 1}}
+  - {{用户排除项 2}}
+
+# === 生图历史（追溯） ===
+renders:
+  - id: v1
+    prompt_file: prompts/three_view.txt
+    image_path: images/three_view_v1.png
+    seed: {{seed}}
+    accepted: true
+    notes: 初版三视图，作为后续基线
+  # 后续每次重生图都追加一条

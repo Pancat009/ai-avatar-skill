@@ -1,0 +1,28 @@
+# 用户运行 skill 时生成的角色目录
+output/
+characters/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Python（如果以后加脚本）
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node（同上）
+node_modules/
+
+# 临时生图输出
+*.png.tmp
+*.jpg.tmp

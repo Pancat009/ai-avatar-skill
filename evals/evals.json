@@ -1,0 +1,26 @@
+{
+  "skill_name": "ai-avatar",
+  "evals": [
+    {
+      "id": 0,
+      "name": "lite-mode-vague-vibe",
+      "prompt": "我想做个角色，赛博朋克风格的女侦探，烟瘾大，话不多。你帮我快点搞定，我没太多时间。",
+      "expected_output": "Skill 应识别这是闪电模式倾向（用户明说没时间），先确认模式，然后用尽可能少的问题收集核心 8 项参数，最快出三视图 prompt 和最简档案。重点检验：是否首先锁定 art_style/color_palette/negative_prompt 三件套；是否避免长流程把用户问烦；最终是否给出可直接喂生图模型的 prompt。",
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "full-mode-novel-protagonist",
+      "prompt": "我在写一部奇幻小说，需要为女主角做完整人设。她是半精灵血统（人类母亲 + 火元素精灵父亲），表面冷漠但内心炽热，10 岁那年因为元素失控烧毁了家乡，被自己族群流放至今。我希望她在故事里有真正的角色弧光——从相信'我是怪物'到学会接受自己。请帮我从外貌到背景全部设计，她叫'灰烬'。",
+      "expected_output": "Skill 应进入完整模式，并因为用户已提供丰富信息，主动建议引入 wound-lie-want 框架（这正是用户暗示的角色弧光需求）。应输出：完整的 character.md、可直接用于角色扮演的 system_prompt.md、5+ 句对白样本、三视图 prompt、consistency.yaml。重点检验：是否捕获到'10 岁烧家'作为 wound、'我是怪物'作为 lie；system_prompt 是否包含足够的对白样本而非只有抽象描述；是否在 output/<slug>/ 下创建独立目录。",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "inspiration-mode-vibe-only",
+      "prompt": "帮我设计一个角色：温柔但藏着秘密的男茶馆老板，水墨风格，宋朝背景。",
+      "expected_output": "用户给的是单句 vibe + 风格 + 背景。Skill 应进入灵感模式，先反推所有参数草案（外貌、性格、背景故事、3 个候选名字），让用户审核修改。重点检验：是否主动推断而不是继续追问基础信息；推断的细节是否符合'温柔但藏着秘密'的张力（不是平庸的'温柔老好人'）；是否锁定了水墨风格作为 art_style 锚点；最终输出是否完整。",
+      "files": []
+    }
+  ]
+}
