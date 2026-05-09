@@ -94,7 +94,7 @@ ai-avatar/
 
 ## 与其他 skill 配合
 
-- **生图执行**：本 skill 只产出 prompt，实际生图建议配合 `jimeng-api-skill`、`comfyui` 或 `azure-openai-image-skill`
+- **生图执行**：本 skill 只产出 prompt，实际生图建议配合 `comfyui` 或 即梦 或 GPT-image 等生图工具或Skill
 - **故事扩展**：角色做完后接 `story-writer` 写剧情
 
 ## License
