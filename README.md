@@ -1,106 +1,129 @@
-# ai-avatar — 数字人设计工坊 Skill
+# ai-avatar-skill
 
-一个 Claude Code / Claude Agent SDK 通用的 **Skill**，用来从零打造一个有灵魂、可生图、能对话、能跨世界扩展的虚拟角色（OC / 数字人 / 角色 IP）。
+> 🌏 [中文文档](README_ZH.md)
 
-最终交付一整套可立刻使用的资产：
-- 结构化角色档案（character.md）
-- 角色扮演 system prompt
-- 5+ 对白样本
-- 三视图 + 跨场景的一致性生图 prompt
-- consistency.yaml（锁定画风、色板、负面提示词、种子）
+A **Claude Code / Agent SDK skill** for designing complete, portable AI virtual characters — OC, digital human, roleplay bot, or character IP — through guided conversation.
 
-> 解决 AI 生图最难的问题：**两张图看起来是同一个人**。
+**What you get at the end:**
+- Structured character profile (`character.md`)
+- Roleplay system prompt (ready to paste into any LLM)
+- 5+ dialogue samples covering key emotional states
+- Three-view image-gen prompts (front / side / back)
+- `consistency.yaml` — locks art style, color palette, negative prompts, and seed so every image looks like the same character
+
+> Solves the hardest problem in AI image generation: **making two images look like the same person.**
 
 ---
 
-## 安装
+## Install
 
-将整个 `ai-avatar/` 目录放到你的 Claude skills 目录：
+Clone or download this repo, then place the `ai-avatar/` folder in your Claude skills directory:
 
-**Claude Code（用户级）：**
+**User-level (Claude Code):**
 ```
 ~/.claude/skills/ai-avatar/
 ```
 
-**项目级：**
+**Project-level:**
 ```
-<project>/.claude/skills/ai-avatar/
+<your-project>/.claude/skills/ai-avatar/
 ```
 
-Windows 路径示例：
+**Windows:**
 ```
 C:\Users\<you>\.claude\skills\ai-avatar\
 ```
 
-重启 Claude Code 或新开会话后，skill 即可被自动发现。
+Restart Claude Code or start a new session — the skill is discovered automatically.
 
-## 使用
+---
 
-直接对 Claude 说出意图即可触发，例如：
+## Usage
 
-- "我想做个角色，赛博朋克风格的女侦探"
-- "帮我设计一个温柔但藏着秘密的男茶馆老板，水墨风"
-- "给我的小说女主做完整人设"
-- "做一个 OC，三视图也要"
-
-Claude 会自动激活 ai-avatar，按对话流程引导你完成设计。
-
-## 三种模式
-
-| 模式 | 用时 | 适合 |
-|------|------|------|
-| **闪电模式** | 5–10 分钟 | 只想快速看到结果，问 8 个核心参数 |
-| **完整模式** | 30 分钟+ | 严肃 IP / 小说人设，6 步全流程 |
-| **灵感模式** | 视情况 | 给一句 vibe 或参考图，Claude 反推草案后审核 |
-
-## 6 步流程（完整模式）
+Just describe what you want in plain language. The skill triggers automatically:
 
 ```
-0. 入口分流
-1. 视觉锚点（画风 / 色板 / 负面提示）   ← 一致性的真正底层
-2. 身份卡（名字 / 性别 / 种族 / 年龄）
-3. 外貌细节（脸 / 眼 / 发 / 体 / 标志性特征）
-4. 灵魂内核（性格 / 创伤 / 声音 / 对白样本）
-5. 世界与故事（背景 / 时间轴 / 关系网）
-6. 衍生交付（三视图 + system prompt + 多场景生图）
-   └─ 内嵌迭代修正循环
+"I want to design a cyberpunk female detective"
+"Help me create a gentle tea-house owner with a secret — ink painting style"
+"Build a full character sheet for my novel's protagonist"
+"Make an OC, I need three-view sheets too"
 ```
 
-## 目录结构
+Claude activates ai-avatar and walks you through the design step by step.
+
+---
+
+## Three Modes
+
+| Mode | Time | Best for |
+|------|------|----------|
+| **Flash** | 5–10 min | Quick results — only 8 core parameters |
+| **Full** | 30 min+ | Serious IP / novel characters — complete 6-step flow |
+| **Inspiration** | Varies | Give a vibe or reference image — Claude drafts everything, you review |
+
+---
+
+## Full Flow (6 Steps)
+
+```
+0. Mode selection
+1. Visual Anchor  (art style / color palette / negative prompts)  ← consistency foundation
+2. Identity Card  (name / gender / species / age)
+3. Visual DNA     (face / eyes / hair / body / signature marks)
+4. Soul Core      (personality / wound / voice / dialogue samples)
+5. World & Story  (backstory / timeline / relationships)
+6. Deliverables   (three-view prompts + system prompt + multi-scene image prompts)
+   └─ built-in iteration loop
+```
+
+> **Why Visual Anchor first?** Locking art style, color palette, negative prompts, and seed *before* anything else is the single biggest factor in cross-image consistency. Deciding style at Step 5 means redoing all prior descriptions.
+
+---
+
+## Repository Structure
 
 ```
 ai-avatar/
-├── SKILL.md                          主流程
-├── README.md                         本文件
+├── SKILL.md                          Main skill logic
+├── README.md                         This file (English)
+├── README_ZH.md                      中文文档
 ├── LICENSE
 ├── assets/
-│   ├── character_template.md         角色档案模板
-│   ├── consistency_template.yaml     一致性锚点模板
-│   └── system_prompt_template.md     角色扮演 prompt 模板
+│   ├── character_template.md         Character profile template
+│   ├── consistency_template.yaml     Visual anchor / consistency lock template
+│   └── system_prompt_template.md     Roleplay system prompt template
 ├── references/
-│   ├── personality_frameworks.md     MBTI / Enneagram / Save the Cat 框架速查
-│   └── prompt_templates.md           生图 prompt 写法 + 风格关键词库
+│   ├── personality_frameworks.md     MBTI / Enneagram / Save the Cat reference
+│   └── prompt_templates.md           Image-gen prompt patterns + style keyword library
 └── evals/
-    └── evals.json                    3 个评测用例
+    └── evals.json                    3 evaluation test cases
 ```
 
-## 设计哲学
+---
 
-1. **一致性 > 信息量** — 先锁画风/色板/负面/种子，后填脸型发色
-2. **矛盾造就深度** — "温柔的杀手"比"温柔的人"有趣
-3. **具体击败抽象** — "琥珀色竖瞳"比"金色眼睛"好
-4. **能演才算成功** — 对白样本 + system prompt 是必交付物
-5. **迭代是常态** — 流程内嵌反馈循环
+## Design Philosophy
 
-## 与其他 skill 配合
+1. **Consistency over information** — Lock style/palette/negatives/seed first; fill in face and hair color second
+2. **Contradiction creates depth** — "A gentle assassin" is more interesting than "a gentle person"
+3. **Specific beats abstract** — "Amber slit pupils" beats "golden eyes"; "ears turn red when cared for" beats "shy"
+4. **Must be performable** — Dialogue samples + system prompt are non-negotiable deliverables
+5. **Iteration is the norm** — The flow has a built-in feedback loop; one-shot perfection is a myth
 
-- **生图执行**：本 skill 只产出 prompt，实际生图建议配合 `comfyui` 或 即梦 或 GPT-image 等生图工具或Skill
-- **故事扩展**：角色做完后接 `story-writer` 写剧情
+---
+
+## Works Well With
+
+- **Image generation**: This skill produces prompts only. Pair with `jimeng-api-skill`, `comfyui`, or `azure-openai-image-skill` for actual generation
+- **Story writing**: After character creation, hand off to `story-writer` for plot and narrative
+
+---
 
 ## License
 
-MIT — 见 [LICENSE](LICENSE)
+MIT — see [LICENSE](LICENSE)
 
-## 贡献
+---
 
-欢迎 issue / PR。如果你用本 skill 做出了喜欢的角色，也欢迎在 issue 里晒图。
+## Contributing
+
+Issues and PRs welcome. If you built a character you love using this skill, feel free to share it in the issues.
